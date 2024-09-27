@@ -1,5 +1,9 @@
 # PPO (Proximal Policy Optimization)
 
+
+<img src="assets/logo.png" alt="PPO LOGO" width="400"/>
+
+
 This repository contains a simplified implementation of PPO, specifically adapted for testing with a Seq2Seq Transformer model.
 
 Proximal Policy Optimization (PPO) is a state-of-the-art reinforcement learning algorithm designed to optimize a policy by interacting with an environment to maximize cumulative rewards. Unlike traditional reinforcement learning methods that directly maximize expected returns, PPO focuses on stabilizing policy updates. This is achieved by using a clipped objective function that constrains policy changes, preventing drastic updates that could potentially destabilize learning.
@@ -20,14 +24,6 @@ The key idea behind PPO is to balance the trade-off between exploration and expl
 4. **Clipped Surrogate Objective Function**: 
    PPO employs a clipped objective function to restrict policy updates. This ensures that the new policy (`πθ`) is not significantly different from the old policy (`πθ_old`), reducing the risk of sudden performance drops.
 
-   - Objective Function:
-   \[
-   L^{CLIP} = \min(\text{ratio} \cdot A, \, \text{clip}(\text{ratio}, 1 - \epsilon, 1 + \epsilon) \cdot A)
-   \]
-   Where:
-   - `ratio` = \(\frac{\pi_\theta(a|s)}{\pi_{\theta_\text{old}}(a|s)}\) is the ratio of the new and old policy probabilities.
-   - `A` is the advantage estimate.
-   - `clip` function restricts the ratio to the range [1 - `eps_clip`, 1 + `eps_clip`].
 
 5. **Training and Fine-Tuning**: 
    The fine-tuning is performed using the `finetune_llm_PPO` function. During training, sequences are generated using the current policy, rewards are estimated using the reward model, and the policy is optimized to maximize the expected reward while minimizing the change in the policy distribution.
